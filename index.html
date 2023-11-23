@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Solar System</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+	<script src="three.js"></script>
+</head>
+
+<body>
+	<script>
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		camera.position.z = 2
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+        const axesHelper = new THREE.AxesHelper(5);
+		scene.add(axesHelper);
+		const grassgeometry = new THREE.PlaneGeometry(2, 2);
+		const grassmaterial = new THREE.MeshBasicMaterial({ color: 0x9ADE7B });
+		const area = new THREE.Mesh(grassgeometry, grassmaterial);
+		scene.add(area);
+
+
+
+
+
+		let spinstatus = false
+        document.addEventListener('keydown', function (event) {
+			switch (event.code) {
+				case "Space":
+					if (spinstatus == false) {
+						spinstatus = true;
+						tickOverview();
+					}
+					else {
+						spinstatus = false;
+					}
+					break;
+			}
+
+			// switch (event.key.toLowerCase()) {
+			// 	case 'w':
+
+			// 		break;
+			// 	case 's':
+
+			// 		break;
+			// }
+
+			//changing camera position
+			switch (event.key) {
+				case '1':
+					camera.position.set(0, 0, 2);
+					break;
+				case '2':
+					camera.position.copy(house1.position);
+					break;
+				case '3':
+					camera.position.copy(house2.position);
+					break;
+			}
+		});
+
+		// function animate() {
+		// 	requestAnimationFrame(animate);
+		// 	renderer.render(scene, camera);
+		// }
+		// animate();
+
+		const clock = new THREE.Clock();
+		let time = Date.now();
+		const tickOverview = () => {
+			if (spinstatus == true) {
+				const elapsedTime = clock.getElapsedTime();
+				camera.position.x = Math.cos(elapsedTime)
+				camera.position.y = Math.sin(elapsedTime)
+				renderer.render(scene, camera);
+				window.requestAnimationFrame(tickOverview);
+			}
+		}
+	</script>
+</body>
+
+</html>
