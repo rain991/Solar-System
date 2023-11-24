@@ -2,220 +2,201 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Solar System</title>
-    <style>
-        body {
-            margin: 0;
-        }
-    </style>
-    <script src="three.js"></script>
+	<meta charset="utf-8">
+	<title>Solar System</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+	<script src="three.js"></script>
 </head>
 
 <body>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+	<script>
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		camera.position.z = 5
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
 
-        const axesHelper = new THREE.AxesHelper(5);
-        scene.add(axesHelper);
+		const axesHelper = new THREE.AxesHelper(5);
+		scene.add(axesHelper);
 
-        let mercurystatus = false
-        let venusstatus = false
-        let earthstatus = false
-        let marsstatus = false
-        let jupiterstatus = false
+		let mercurystatus = false
+		let venusstatus = false
+		let earthstatus = false
+		let marsstatus = false
+		let jupiterstatus = false
 
-
-        const sunspheregeometry = new THREE.SphereGeometry(0.55, 32, 16);
-        const sunspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
-        const sunsphere = new THREE.Mesh(sunspheregeometry, sunspherematerial);
-        const sungroup = new THREE.Group();
-        sungroup.add(sunsphere);
-        scene.add(sungroup)
+		//background should be added
 
 
-        const mercuryspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 1th
-        const mercuryspherematerial = new THREE.MeshStandardMaterial({ color: 0xee9b00 }); // to be changed
-        const mercurysphere = new THREE.Mesh(mercuryspheregeometry, mercuryspherematerial);
-        const mercurygroup = new THREE.Group();
-        mercurygroup.add(mercurysphere);
-        scene.add(mercurygroup)
-        mercurygroup.position.x += 0.67
-        mercurygroup.position.y += 0.3
-
-        const venusspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 2th
-        const venusspherematerial = new THREE.MeshStandardMaterial({ color: 0xfb5607 }); // to be changed (Material)
-        const venussphere = new THREE.Mesh(venusspheregeometry, venusspherematerial);
-        const venusgroup = new THREE.Group();
-        venusgroup.add(venussphere);
-        scene.add(venusgroup)
-        venusgroup.position.x += 1.2
-        venusgroup.position.y += 0.65
-
-        const earthspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 3th
-        const earthspherematerial = new THREE.MeshStandardMaterial({ color: 0xf00b4d8 }); // to be changed
-        const earthsphere = new THREE.Mesh(earthspheregeometry, earthspherematerial);
-        const earthgroup = new THREE.Group();
-        earthgroup.add(earthsphere);
-        //  scene.add(earthgroup)  
-        earthgroup.position.x += 2
-        earthgroup.position.y += 1.2
+		const sunspheregeometry = new THREE.SphereGeometry(0.55, 32, 16);
+		const sunspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
+		const sunsphere = new THREE.Mesh(sunspheregeometry, sunspherematerial);
+		const sungroup = new THREE.Group();
+		sungroup.add(sunsphere);
+		scene.add(sungroup)
 
 
-        const moonspheregeometry = new THREE.SphereGeometry(0.06, 32, 16);
-        const moonspherematerial = new THREE.MeshStandardMaterial({ color: 0x778da9 }); // to be changed
-        const moonsphere = new THREE.Mesh(moonspheregeometry, moonspherematerial);
-        const earthmoongroup = new THREE.Group()
-        earthmoongroup.add(earthgroup)
-        earthmoongroup.add(moonsphere)
-        moonsphere.position.x += 2.3
-        moonsphere.position.y += 1.35
-        scene.add(earthmoongroup)
+		const mercuryspheregeometry = new THREE.SphereGeometry(0.13, 32, 16); // 1th
+		const mercuryspherematerial = new THREE.MeshStandardMaterial({ color: 0xee9b00 }); // to be changed
+		const mercurysphere = new THREE.Mesh(mercuryspheregeometry, mercuryspherematerial);
+		const mercurygroup = new THREE.Group();
+		mercurysphere.position.x += 1 //1
+		mercurysphere.position.y += 0.3 //0.3
+		mercurygroup.add(mercurysphere);
+		scene.add(mercurygroup)
+	
 
 
+		const venusspheregeometry = new THREE.SphereGeometry(0.18, 32, 16); // 2th
+		const venusspherematerial = new THREE.MeshStandardMaterial({ color: 0xfb5607 }); // to be changed (Material)
+		const venussphere = new THREE.Mesh(venusspheregeometry, venusspherematerial);
+		const venusgroup = new THREE.Group();
+		
+		venusgroup.add(venussphere);
+		venussphere.position.x += 1.8
+		venussphere.position.y += 0.65
+		scene.add(venusgroup)
 
-        const marspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 4th
-        const marspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
-        const marssphere = new THREE.Mesh(marspheregeometry, marspherematerial);
-        const marsgroup = new THREE.Group();
-        marsgroup.add(marssphere);
-        marssphere.position.x += 3.5
-        marssphere.position.y += 1.9
-        scene.add(marsgroup)
+		var textureLoader = new THREE.TextureLoader();
+		var earthtexture = textureLoader.load('/textures/earthtexture.jpg');
 
+		const earthspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 3th
+		const earthspherematerial = new THREE.MeshStandardMaterial({ color: 0xf00b4d8 });
+		earthspherematerial.map = earthtexture;
+		const earthsphere = new THREE.Mesh(earthspheregeometry, earthspherematerial);
+		const earthgroup = new THREE.Group();
+		earthsphere.position.x += 2
+		earthsphere.position.y += 1.2
 
-        const jupiterspheregeometry = new THREE.SphereGeometry(0.31, 32, 16); // 5th
-        const jupiterspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
-        const jupitersphere = new THREE.Mesh(jupiterspheregeometry, jupiterspherematerial);
-        const jupitergroup = new THREE.Group();
-        jupitergroup.add(jupitersphere);
-        jupitersphere.position.x += 4.5
-        jupitersphere.position.y += 3
-        scene.add(jupitergroup)
-
-        light = new THREE.PointLight(0xae2012, 15, 100); // second to be changed, light intensity
-        light.position.set(0, 0, 0);
-        scene.add(light);
-
-        var ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.5); // Soft white light
-        scene.add(ambientLight);
-
-
-        document.addEventListener('keydown', function (event) {
-            switch (event.code) {
-                case "Space":
-                    if (mercurystatus == false || venusstatus == false || earthstatus == false || marsstatus == false || jupiterstatus == false){
-                    mercurystatus = true
-                    venusstatus = true
-                    earthstatus = true
-                    marsstatus = true
-                    jupiterstatus = true}
-                    else{
-                        mercurystatus = false
-                    venusstatus = false
-                    earthstatus = false
-                    marsstatus = false
-                    jupiterstatus = false
-                    }
-                    break;
-            }
-            switch (event.key) {
-                case '1':
-                    if(mercurystatus==false){
-                        mercurystatus = true
-                    }else{
-                        mercurystatus = false
-                    }
-                    break;
-                case '2':
-                if(venusstatus==false){
-                        venusstatus = true
-                    }else{
-                        venusstatus = false
-                    }
-                    break;
-                case '3':
-                if(earthstatus==false){
-                        earthstatus = true
-                    }else{
-                        earthstatus = false
-                    }
-                    break;
-                case '4':
-                if(marsstatus==false){
-                        marsstatus = true
-                    }else{
-                    marsstatus = false
-                    }
-                    break;
-                case '5':
-                if(jupiterstatus==false){
-                    jupiterstatus = true
-                    }else{
-                        jupiterstatus = false
-                    }
-                    break;
-            }
-        });
-
-        var initialPosition = marsgroup.position.clone();
-marsgroup.onBeforeRender = function () {
-    if (!initialPosition.equals(marsgroup.position)) {
-        console.log(' MarsGroup Position changed!');
-        var pointGeometry = new THREE.BufferGeometry();
-var vertices = new Float32Array(initialPosition.clone);
-pointGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-
-// Create a material for the points (can be any material, e.g., MeshBasicMaterial)
-var pointMaterial = new THREE.PointsMaterial({ color: 0xff0000, size: 0.1 }); // Adjust size as needed
-
-// Create a Points object and add it to the scene
-var pointCloud = new THREE.Points(pointGeometry, pointMaterial);
-scene.add(pointCloud);
-    }
-
-    // Update the initial position for the next frame
-    initialPosition.copy(cube.position);
-};
+		const moonspheregeometry = new THREE.SphereGeometry(0.06, 32, 16);
+		const moonspherematerial = new THREE.MeshStandardMaterial({ color: 0x778da9 }); // to be changed
+		const moonsphere = new THREE.Mesh(moonspheregeometry, moonspherematerial);
+		const earthmoongroup = new THREE.Group()
+		earthmoongroup.add(earthsphere)
+		earthmoongroup.add(moonsphere)
+		moonsphere.position.x += 2.3
+		moonsphere.position.y += 1.35
+		scene.add(earthmoongroup)
 
 
 
+		const marspheregeometry = new THREE.SphereGeometry(0.10, 32, 16); // 4th
+		const marspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
+		const marssphere = new THREE.Mesh(marspheregeometry, marspherematerial);
+		const marsgroup = new THREE.Group();
+		marsgroup.add(marssphere);
+		marssphere.position.x += 3.5
+		marssphere.position.y += 1.9
+		scene.add(marsgroup)
 
 
+		const jupiterspheregeometry = new THREE.SphereGeometry(0.31, 32, 16); // 5th
+		const jupiterspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
+		const jupitersphere = new THREE.Mesh(jupiterspheregeometry, jupiterspherematerial);
+		const jupitergroup = new THREE.Group();
+		jupitergroup.add(jupitersphere);
+		jupitersphere.position.x += 4.5
+		jupitersphere.position.y += 3
+		scene.add(jupitergroup)
 
-        renderer.render(scene, camera);
-        const clock = new THREE.Clock();
-        let time = Date.now();
-        const tickOverview = () => {
-            if(mercurystatus==true){
-                mercurygroup.rotation.z += 0.01
-                    }
-                    if(venusstatus==true){
-                venusgroup.rotation.z += 0.02
-                    }
-                    if(earthmoongroup==true){
-                earthmoongroup.rotation.z += 0.03
-                    }
-                    if(marsstatus==true){
-                marsgroup.rotation.z += 0.04
-                    }
-                    if(jupiterstatus==true){
-                jupitergroup.rotation.z += 0.05
-                    }
+		light = new THREE.PointLight(0xae2012, 15, 100); // second to be changed, light intensity
+		light.position.set(0, 0, 0);
+		scene.add(light);
 
-                const elapsedTime = clock.getElapsedTime();
-                marsgroup.rotation.z += 0.01
-                mercurygroup.rotation.z += 0.01
-                renderer.render(scene, camera);
-                window.requestAnimationFrame(tickOverview);
-        }
-        tickOverview()
-    </script>
+		var ambientLight = new THREE.AmbientLight(0xFFFFFF); // Soft white light
+		scene.add(ambientLight);
+
+
+		document.addEventListener('keydown', function (event) {
+			switch (event.code) {
+				case "Space":
+					if (mercurystatus == false || venusstatus == false || earthstatus == false || marsstatus == false || jupiterstatus == false) {
+						mercurystatus = true
+						venusstatus = true
+						earthstatus = true
+						marsstatus = true
+						jupiterstatus = true
+					}
+					else {
+						mercurystatus = false
+						venusstatus = false
+						earthstatus = false
+						marsstatus = false
+						jupiterstatus = false
+					}
+					break;
+			}
+			switch (event.key) {
+				case '1':
+					if (mercurystatus == false) {
+						mercurystatus = true
+					} else {
+						mercurystatus = false
+					}
+					break;
+				case '2':
+					if (venusstatus == false) {
+						venusstatus = true
+					} else {
+						venusstatus = false
+					}
+					break;
+				case '3':
+					if (earthstatus == false) {
+						earthstatus = true
+					} else {
+						earthstatus = false
+					}
+					break;
+				case '4':
+					if (marsstatus == false) {
+						marsstatus = true
+					} else {
+						marsstatus = false
+					}
+					break;
+				case '5':
+					if (jupiterstatus == false) {
+						jupiterstatus = true
+					} else {
+						jupiterstatus = false
+					}
+					break;
+			}
+		});
+
+		//renderer.render(scene, camera);
+
+
+		const clock = new THREE.Clock();
+		let time = Date.now();
+		const tickOverview = () => {
+			if (mercurystatus == true) {
+				mercurygroup.rotation.z += 0.05;
+			}
+			if (venusstatus == true) {
+				venusgroup.rotation.z += 0.05;
+			}
+			if (earthstatus == true) {
+				earthmoongroup.rotation.z += 0.05;
+			}
+			if (marsstatus == true) {
+				marsgroup.rotation.z += 0.05;
+			}
+			if (jupiterstatus == true) {
+				jupitergroup.rotation.z += 0.05;
+			}
+			const elapsedTime = clock.getElapsedTime();
+			renderer.render(scene, camera);
+			window.requestAnimationFrame(tickOverview);
+		}
+		tickOverview()
+	</script>
 </body>
 
 </html>
