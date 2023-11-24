@@ -23,28 +23,78 @@
         const axesHelper = new THREE.AxesHelper(5);
         scene.add(axesHelper);
 
-        const sunspheregeometry = new THREE.SphereGeometry(0.4, 32, 16);
+        const sunspheregeometry = new THREE.SphereGeometry(0.55, 32, 16);
         const sunspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
         const sunsphere = new THREE.Mesh(sunspheregeometry, sunspherematerial);
-        scene.add(sunsphere);
+        const sungroup = new THREE.Group();
+        sungroup.add(sunsphere);
+        scene.add(sungroup)
 
-        const marspheregeometry = new THREE.SphereGeometry(0.15, 32, 16);
+
+        const mercuryspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 1th
+        const mercuryspherematerial = new THREE.MeshStandardMaterial({ color: 0xee9b00 }); // to be changed
+        const mercurysphere = new THREE.Mesh(mercuryspheregeometry, mercuryspherematerial);
+        const mercurygroup = new THREE.Group();
+        mercurygroup.add(mercurysphere);
+        scene.add(mercurygroup)
+        mercurygroup.position.x+=0.67
+        mercurygroup.position.y+=0.3
+
+        const venusspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 2th
+        const venusspherematerial = new THREE.MeshStandardMaterial({ color: 0xfb5607 }); // to be changed (Material)
+        const venussphere = new THREE.Mesh(venusspheregeometry, venusspherematerial);
+        const venusgroup = new THREE.Group();
+        venusgroup.add(venussphere);
+        scene.add(venusgroup)
+        venusgroup.position.x+=1.2
+        venusgroup.position.y+=0.65
+
+        const earthspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 3th
+        const earthspherematerial = new THREE.MeshStandardMaterial({ color: 0xf00b4d8}); // to be changed
+        const earthsphere = new THREE.Mesh(earthspheregeometry, earthspherematerial);
+        const earthgroup = new THREE.Group();
+        earthgroup.add(earthsphere);
+      //  scene.add(earthgroup)  
+        earthgroup.position.x+=2
+        earthgroup.position.y+=1.2
+
+
+        const moonspheregeometry = new THREE.SphereGeometry(0.06, 32, 16);
+        const moonspherematerial = new THREE.MeshStandardMaterial({ color: 0x778da9}); // to be changed
+        const moonsphere = new THREE.Mesh(moonspheregeometry, moonspherematerial);
+        const earthmoongroup = new THREE.Group()
+        earthmoongroup.add(earthgroup)
+        earthmoongroup.add(moonsphere)
+        moonsphere.position.x+=2.3
+        moonsphere.position.y+=1.35
+        scene.add(earthmoongroup)
+
+
+
+        const marspheregeometry = new THREE.SphereGeometry(0.15, 32, 16); // 4th
         const marspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
         const marssphere = new THREE.Mesh(marspheregeometry, marspherematerial);
+        const marsgroup = new THREE.Group();
+        marsgroup.add(marssphere);
+        marssphere.position.x += 3.5
+        marssphere.position.y += 1.9
+        scene.add(marsgroup)
 
+
+        const jupiterspheregeometry = new THREE.SphereGeometry(0.4, 32, 16); // 4th
+        const jupiterspherematerial = new THREE.MeshStandardMaterial({ color: 0xffff00 });
+        const jupitersphere = new THREE.Mesh(jupiterspheregeometry, jupiterspherematerial);
+        const jupitergroup = new THREE.Group();
+        jupitergroup.add(jupitersphere);
+        jupitersphere.position.x += 4.5
+        jupitersphere.position.y += 3
+        scene.add(jupitergroup)
 
         light = new THREE.PointLight(0xae2012, 15, 100); // second to be changed, light intensity
         light.position.set(0, 0, 0);
         scene.add(light);
 
-
-        const marsgroup = new THREE.Group();
-        marsgroup.add(marssphere);
-        marssphere.position.x += 0.7
-        marssphere.position.y += 0.35
-        scene.add(marsgroup)
-
-        var ambientLight = new THREE.AmbientLight(0xFFFFFF,0.5); // Soft white light
+        var ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.5); // Soft white light
         scene.add(ambientLight);
 
         let spinstatus = false
